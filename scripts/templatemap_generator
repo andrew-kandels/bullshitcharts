@@ -1,0 +1,13 @@
+#!/bin/sh
+cd "$(dirname $0)/.."
+basePath=$(pwd)
+
+for path in Application; do
+    /usr/bin/php vendor/zendframework/zendframework/bin/templatemap_generator.php \
+        -w -l module/$path -v module/$path/view -o module/$path/template_map.php
+    sed -i'' -r "s#^    'view/#    '#g" module/$path/template_map.php
+    sed -i'' -r "s#__DIR__ . '//#__DIR__ . '/#g" module/$path/template_map.php
+    sed -i'' -r "/    'layout/d" module/$path/template_map.php
+done
+
+exit 0

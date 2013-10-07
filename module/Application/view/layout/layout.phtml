@@ -1,0 +1,42 @@
+<?php 
+$this->headTitle()->setSeparator(' - ')
+                  ->setAutoEscape(false);
+
+$basePath = $this->basePath();
+$this->headLink()->appendStylesheet($basePath . '/css/style.css');
+//                 ->appendStylesheet('http://fonts.googleapis.com/css?family=Dancing+Script')
+//                 ->appendAlternate('http://andrewkandels.com/rss', 'application/rss+xml', 'RSS Feed');
+
+$this->headLink(array(
+    'rel'  => 'shortcut icon',
+    'type' => 'image/vnd.microsoft.icon',
+    'href' => $basePath . '/favicon.ico',
+));
+
+$this->headScript()
+     ->appendFile('https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js', 'text/javascript');
+
+echo $this->doctype();
+?>
+<html lang="en" class="no-js">
+<head>
+<meta charset="UTF-8">
+<?php echo $this->headTitle('BullShitCharts') ?>
+<?php echo $this->headMeta()->appendName('viewport', 'width=device-width, initial-scale=1.0') ?>
+<?php echo $this->headLink() ?>
+<?php echo $this->headScript() ?>
+</head>
+<body>
+<?php echo $this->content; ?>
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-12916872-1']);
+  _gaq.push(['_trackPageview']);
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+</body>
+</html>

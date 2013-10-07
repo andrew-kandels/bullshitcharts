@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="platform" default="build">
+
+ <target name="build" depends="lock,version,composer,cache,compass,unlock"/>
+
+ <target name="lock" description="Creates a lock file">
+    <touch file="${basedir}/jenkins-running.txt"/>
+ </target>
+
+ <target name="unlock" description="Creates a lock file">
+    <delete file="${basedir}/jenkins-running.txt"/>
+ </target>
+
+ <target name="version" description="Deploy code to development">
+  <mkdir dir="${basedir}/data/cache"/>
+  <delete>
+    <fileset dir="${basedir}/data/cache" includes="module*"/>
+  </delete>
+  <exec executable="scripts/version.sh" failonerror="true">
+  </exec>
+ </target>
+
+ <target name="composer" description="Upgrade Composer packages">
+  <exec executable="php" failonerror="true">
+   <arg value="composer.phar" />
+   <arg value="update" />
+   <arg value="--dev" />
+  </exec>
+ </target>
+
+ <target name="cache" description="Build class/template map cache files">
+  <exec executable="scripts/classmap_generator" failonerror="true">
+  </exec>
+  <exec executable="scripts/templatemap_generator" failonerror="true">
+  </exec>
+ </target>
+
+ <target name="closure" description="Run Google Closure compiler for bundled JavaScript (jQuery, etc.).">
+  <exec executable="scripts/cb" failonerror="true">
+   <arg value="compile" />
+   <arg value="scripts" />
+  </exec>
+ </target>
+
+ <target name="compass" description="Compile sass/compass *.scss files">
+  <delete>
+      <fileset dir="${basedir}/public/css">
+          <include name="style.css" />
+      </fileset>
+  </delete>
+  <exec executable="compass" failonerror="true">
+   <arg value="compile" />
+   <arg value="--config" />
+   <arg value="config/compass.rb" />
+  </exec>
+ </target>
+
+ <target name="contain" description="Compile Contain Entities">
+  <exec executable="scripts/containCompiler" failonerror="true">
+  </exec>
+ </target>
+
+</project>

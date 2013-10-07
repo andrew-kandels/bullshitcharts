@@ -1,0 +1,15 @@
+#!/bin/sh
+cd "$(dirname $0)/.."
+basePath=$(pwd)
+
+for path in Application; do
+    cd "$basePath/module/$path"
+    php ../../vendor/zendframework/zendframework/bin/classmap_generator.php
+done
+
+for path in akandels/contain; do
+    cd "$basePath/vendor/$path"
+    php ../../../vendor/zendframework/zendframework/bin/classmap_generator.php
+done
+
+exit 0

@@ -1,0 +1,25 @@
+{
+    "name": "andrew-kandels/bullshitcharts",
+    "repositories": {
+        "bootstrap-sass": {
+            "type": "package",
+            "package": {
+                "name": "thomas-mcdonald/bootstrap-sass",
+                "version": "3",
+                "source": {
+                    "url": "git@github.com:thomas-mcdonald/bootstrap-sass.git",
+                    "type": "git",
+                    "reference": "3"
+                }
+            }
+        }
+    },
+    "require": {
+        "zendframework/zendframework": "2.2.3",
+        "akandels/contain": "dev-master",
+        "akandels/contain-mapper": "dev-master",
+        "phpunit/phpunit": "*",
+        "thomas-mcdonald/bootstrap-sass": "3",
+        "jlong/sass-twitter-bootstrap": "3.0.0"
+    }
+}
